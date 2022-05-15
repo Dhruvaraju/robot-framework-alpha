@@ -11,6 +11,9 @@
     - [Script Running Options](#script-running-options)
     - [Running Multiple test suits](#running-multiple-test-suits)
     - [Running a single test case](#running-a-single-test-case)
+    - [Creating custom keywords](#creating-custom-keywords)
+    - [Breaking down test to keywords](#breaking-down-test-to-keywords)
+    - [Moving keywords to resources folder](#moving-keywords-to-resources-folder)
 
 ### Installing python and pip
 
@@ -194,6 +197,7 @@ robot -d results -N "Regression test suite" "tests/folder for some tests"
 ```
 
 ### Running a single test case
+
 - use the absolute name or '-t' switch with test name
 
 ```
@@ -201,5 +205,173 @@ robot -d results <<absolute-path-for-test-case>>
 robot -d results -t "name-of-test-case" tests # runs a particular test with name specified in test folder
 robot -d results -i "mention-tag-name" tets # runs with specific tag name in tests folder
 ```
+
 > We can use multiple '-t' or '-i' switches in same execution.
 
+### Creating custom keywords
+
+- We can create a custom keywords by defining them under keywords
+- In the below example
+
+  - Do Something
+  - Do Something Else
+  - Do Another Thing
+    are custom defined key words, their implementation in mentioned under the keywords section.
+
+- While executing this script the keywords will be displayed as test steps.
+- To see the execution keywords wee need to drill down the tree view in results (log.html)
+
+```robot
+*** Settings ***s
+
+*** Variables ***
+
+*** Test Cases ***
+Test case 01
+    Do Something
+    Do Something Else
+
+Test Case 02
+    Do Something
+    Do Another Thing
+
+*** Keywords ***
+Do Something
+    log    I am doing something
+
+Do Something Else
+    log    I am doing something else
+
+Do Another Thing
+    log     I am doing another thing
+```
+
+### Breaking down test to keywords
+
+**Example**
+
+```robot
+
+*** Settings ***
+Documentation    Searching a topic and trying to edit it
+Library    SeleniumLibrary
+*** Variables ***
+
+*** Test Cases ***
+Should display user not logged in message
+    [Documentation]    User should get a prompt stating they are not logged in
+    [Tags]    web   smoke
+    # Begin Web Test
+    OPEN BROWSER    about:blank    chrome
+
+    # Search for Topic
+    go to    https://en.wikipedia.org/wiki/Main_Page
+    wait until page contains    Main Page
+    input text    id=searchInput    robot framework
+    click button    id=searchButton
+    wait until page contains    Robot Framework is a generic test automation
+
+    # Try To Edit Topic
+    click link    xpath=//*[@id="ca-edit"]/a
+    wait until page contains    You are not logged in.
+
+    # End Web Test
+    close browser
+*** Keywords ***
+```
+
+- Every comment can be converted into a keyword for that
+- Move the text in comment to keywords section making them as keywords
+- Place the keywords used under the comments as keyword implementation
+- Refer to the below example
+
+```robot
+*** Settings ***
+Documentation    Searching a topic and trying to edit it
+Library    SeleniumLibrary
+*** Variables ***
+
+*** Test Cases ***
+Should display user not logged in message
+    [Documentation]    User should get a prompt stating they are not logged in
+    [Tags]    web   smoke
+    Begin Web Test
+    Search for Topic
+    Try To Edit Topic
+    End Web Test
+
+*** Keywords ***
+Begin Web Test
+    OPEN BROWSER    about:blank    chrome
+
+Search for Topic
+    go to    https://en.wikipedia.org/wiki/Main_Page
+    wait until page contains    Main Page
+    input text    id=searchInput    robot framework
+    click button    id=searchButton
+    wait until page contains    Robot Framework is a generic test automation
+
+Try To Edit Topic
+    click link    xpath=//*[@id="ca-edit"]/a
+    wait until page contains    You are not logged in.
+
+End Web Test
+    close browser
+```
+
+> Now documentation in log.html will display only keywords as steps.
+
+### Moving keywords to resources folder
+
+We can split the keywords into different files under resources like
+Common.robot for common functions
+
+```robot
+*** Settings ***
+Library    SeleniumLibrary
+*** Keywords ***
+Begin Web Test
+    OPEN BROWSER    about:blank    chrome
+
+End Web Test
+    close browser
+```
+
+Wikipedia.robot for wikipedia related interaction
+
+```robot
+*** Settings ***
+Library    SeleniumLibrary
+*** Keywords ***
+Search for Topic
+    go to    https://en.wikipedia.org/wiki/Main_Page
+    wait until page contains    Main Page
+    input text    id=searchInput    robot framework
+    click button    id=searchButton
+    wait until page contains    Robot Framework is a generic test automation
+
+Try To Edit Topic
+    click link    xpath=//*[@id="ca-edit"]/a
+    wait until page contains    You are not logged in.
+```
+
+Now the test script will look as below
+
+```robot
+*** Settings ***
+Documentation    Searching a topic and trying to edit it
+Resource    ../Resources/Common.robot
+Resource    ../Resources/Wikipedia.robot
+*** Variables ***
+
+*** Test Cases ***
+Should display user not logged in message
+    [Documentation]    User should get a prompt stating they are not logged in
+    [Tags]    web   smoke
+    Common.Begin Web Test
+    Wikipedia.Search for Topic
+    Wikipedia.Try To Edit Topic
+    Common.End Web Test
+
+*** Keywords ***
+```

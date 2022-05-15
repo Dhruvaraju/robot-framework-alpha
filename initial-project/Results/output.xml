@@ -1,53 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0 (Python 3.10.4 on win32)" generated="20220515 15:05:33.597" rpa="false" schemaversion="3">
-<suite id="s1" name="Find Dexter" source="D:\devworks\python_projects\robot-framework-alpha\initial-project\tests\Find_Dexter.robot">
-<test id="s1-t1" name="Navigate to wikipedia page" line="7">
+<robot generator="Robot 5.0 (Python 3.10.4 on win32)" generated="20220515 21:17:27.238" rpa="false" schemaversion="3">
+<suite id="s1" name="Wikipedia" source="D:\devworks\python_projects\robot-framework-alpha\initial-project\tests\wikipedia.robot">
+<test id="s1-t1" name="Should display user not logged in message" line="8">
+<kw name="Begin Web Test" library="Common">
 <kw name="Open Browser" library="SeleniumLibrary">
-<arg>https://www.google.com/search?q=dexter</arg>
+<arg>about:blank</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20220515 15:05:33.927" level="INFO">Opening browser 'chrome' to base url 'https://www.google.com/search?q=dexter'.</msg>
-<status status="PASS" starttime="20220515 15:05:33.926" endtime="20220515 15:05:38.606"/>
+<msg timestamp="20220515 21:17:27.560" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20220515 21:17:27.560" endtime="20220515 21:17:29.262"/>
+</kw>
+<status status="PASS" starttime="20220515 21:17:27.559" endtime="20220515 21:17:29.263"/>
+</kw>
+<kw name="Search for Topic" library="Wikipedia">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>https://en.wikipedia.org/wiki/Main_Page</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20220515 21:17:29.264" level="INFO">Opening url 'https://en.wikipedia.org/wiki/Main_Page'</msg>
+<status status="PASS" starttime="20220515 21:17:29.264" endtime="20220515 21:17:30.041"/>
 </kw>
 <kw name="Wait Until Page Contains" library="SeleniumLibrary">
-<arg>Dexter (TV series)</arg>
+<arg>Main Page</arg>
 <doc>Waits until ``text`` appears on the current page.</doc>
-<status status="PASS" starttime="20220515 15:05:38.606" endtime="20220515 15:05:38.635"/>
+<status status="PASS" starttime="20220515 21:17:30.041" endtime="20220515 21:17:30.093"/>
 </kw>
-<kw name="Press Keys" library="SeleniumLibrary">
-<arg>xpath=//*[@id="rso"]/div[2]/div/div/div/div[1]/a</arg>
-<arg>ENTER</arg>
-<doc>Simulates the user pressing key(s) to an element or on the active browser.</doc>
-<msg timestamp="20220515 15:05:38.636" level="INFO">Sending key(s) ('ENTER',) to xpath=//*[@id="rso"]/div[2]/div/div/div/div[1]/a element.</msg>
-<msg timestamp="20220515 15:05:39.973" level="INFO">Pressing special key ENTER to element.</msg>
-<msg timestamp="20220515 15:05:39.973" level="INFO">Releasing special key ENTER.</msg>
-<status status="PASS" starttime="20220515 15:05:38.635" endtime="20220515 15:05:40.109"/>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>id=searchInput</arg>
+<arg>robot framework</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20220515 21:17:30.094" level="INFO">Typing text 'robot framework' into text field 'id=searchInput'.</msg>
+<status status="PASS" starttime="20220515 21:17:30.093" endtime="20220515 21:17:30.252"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>id=searchButton</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20220515 21:17:30.252" level="INFO">Clicking button 'id=searchButton'.</msg>
+<status status="PASS" starttime="20220515 21:17:30.252" endtime="20220515 21:17:31.298"/>
 </kw>
 <kw name="Wait Until Page Contains" library="SeleniumLibrary">
-<arg>Crime drama</arg>
+<arg>Robot Framework is a generic test automation</arg>
 <doc>Waits until ``text`` appears on the current page.</doc>
-<status status="PASS" starttime="20220515 15:05:40.110" endtime="20220515 15:05:40.191"/>
+<status status="PASS" starttime="20220515 21:17:31.299" endtime="20220515 21:17:31.347"/>
 </kw>
+<status status="PASS" starttime="20220515 21:17:29.263" endtime="20220515 21:17:31.348"/>
+</kw>
+<kw name="Try To Edit Topic" library="Wikipedia">
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>xpath=//*[@id="ca-edit"]/a</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20220515 21:17:31.349" level="INFO">Clicking link 'xpath=//*[@id="ca-edit"]/a'.</msg>
+<status status="PASS" starttime="20220515 21:17:31.349" endtime="20220515 21:17:32.835"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>You are not logged in.</arg>
+<doc>Waits until ``text`` appears on the current page.</doc>
+<status status="PASS" starttime="20220515 21:17:32.835" endtime="20220515 21:17:32.904"/>
+</kw>
+<status status="PASS" starttime="20220515 21:17:31.348" endtime="20220515 21:17:32.904"/>
+</kw>
+<kw name="End Web Test" library="Common">
 <kw name="Close Browser" library="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20220515 15:05:40.193" endtime="20220515 15:05:42.431"/>
+<status status="PASS" starttime="20220515 21:17:32.905" endtime="20220515 21:17:35.133"/>
 </kw>
-<doc>Identify Dexter tv series</doc>
+<status status="PASS" starttime="20220515 21:17:32.905" endtime="20220515 21:17:35.134"/>
+</kw>
+<doc>User should get a prompt stating they are not logged in</doc>
+<tag>smoke</tag>
 <tag>web</tag>
-<status status="PASS" starttime="20220515 15:05:33.925" endtime="20220515 15:05:42.432"/>
+<status status="PASS" starttime="20220515 21:17:27.558" endtime="20220515 21:17:35.135"/>
 </test>
-<doc>Load Dexter wikipedia page</doc>
-<status status="PASS" starttime="20220515 15:05:33.605" endtime="20220515 15:05:42.436"/>
+<doc>Searching a topic and trying to edit it</doc>
+<status status="PASS" starttime="20220515 21:17:27.241" endtime="20220515 21:17:35.140"/>
 </suite>
 <statistics>
 <total>
 <stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
+<stat pass="1" fail="0" skip="0">smoke</stat>
 <stat pass="1" fail="0" skip="0">web</stat>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Find Dexter">Find Dexter</stat>
+<stat pass="1" fail="0" skip="0" id="s1" name="Wikipedia">Wikipedia</stat>
 </suite>
 </statistics>
 <errors>
