@@ -6,7 +6,8 @@
     - [Selenium drivers for different browsers](#selenium-drivers-for-different-browsers)
     - [Folder Structure for scripts](#folder-structure-for-scripts)
     - [Structure of a Script](#structure-of-a-script)
-    - [Fist Test Script](#fist-test-script)
+    - [First Test Script](#first-test-script)
+    - [Creating a sample test script with locators](#creating-a-sample-test-script-with-locators)
 
 ### Installing python and pip
 
@@ -58,7 +59,7 @@ Download and install pycharm community edition and add intellibot plugin (Choose
   - Settings
     - Documentation Some info about the suite
     - Library Some library name
-    - Resource Some resourcefile.robot
+    - Resource Some resource_file.robot
     - Suite Setup/Suite Teardown Some Keyword
     - Test Setup/Test Teardown Some Keyword
     - Test Timeout X
@@ -73,7 +74,7 @@ Download and install pycharm community edition and add intellibot plugin (Choose
 
 All robot scripts have extension as `.robot`, after every keyword we need to provide 2 spaces
 
-### Fist Test Script
+### First Test Script
 
 - Under setting we need to add
   - Documentation add basic info about the test case
@@ -94,7 +95,7 @@ Library    SeleniumLibrary
 *** Variables ***
 
 *** Test Cases ***
-User must signin to checkout
+User must sign-in to checkout
     [Documentation]    This will give some basic info about the test
     [Tags]    Smoke
     OPEN BROWSER    https://www.amazon.in/    chrome
@@ -102,10 +103,36 @@ User must signin to checkout
 *** Keywords ***
 ```
 
-- To run a test script use the command `robot <<testscriptname.robot>>`
-- To run a testscript and place reslts in a specific folder `robot -d <<folderpath>> <<testscriptname.robot>>`
+- To run a test script use the command `robot <<test_script_name.robot>>`
+- To run a test script and place results in a specific folder `robot -d <<folder_path>> <<test_script_name.robot>>`
 
 ```
 robot tests/Amazon.robot #for the location where script is present
 robot -d results tests/Amazon.robot #results is the folder where the results will be stored
+```
+> Its a best practice to create a manual test scenario before writing automation test script.
+
+### Creating a sample test script with locators
+- The ID or xpath or css selector of an element is called as locator.
+- Navigate a desired webpage in chrome, right click on the element you want to find a locator for.
+- Click on inspect in developer tools the section will be highlighted.
+- Right click on the section in dev tools, and go to copy, it will show options to copy as xpath css and few other things.
+- We can now use this in conjunction with different keywords from different libraries in robot framework.
+
+```robot
+*** Settings ***
+Documentation    Load Dexter wikipedia page
+Library    SeleniumLibrary
+*** Variables ***
+
+*** Test Cases ***
+Navigate to wikipedia page
+    [Documentation]    Identify Dexter tv series
+    [Tags]    web
+    OPEN BROWSER    https://www.google.com/search?q=dexter   chrome
+    wait until page contains    Dexter (TV series)
+    press keys    xpath=//*[@id="rso"]/div[2]/div/div/div/div[1]/a    ENTER
+    wait until page contains    Crime drama
+    close browser
+*** Keywords ***
 ```
