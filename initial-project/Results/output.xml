@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0 (Python 3.10.4 on win32)" generated="20220515 21:17:27.238" rpa="false" schemaversion="3">
+<robot generator="Robot 5.0 (Python 3.10.4 on win32)" generated="20220515 21:40:37.893" rpa="false" schemaversion="3">
 <suite id="s1" name="Wikipedia" source="D:\devworks\python_projects\robot-framework-alpha\initial-project\tests\wikipedia.robot">
-<test id="s1-t1" name="Should display user not logged in message" line="8">
-<kw name="Begin Web Test" library="Common">
+<test id="s1-t1" name="Should display user not logged in message" line="10">
+<kw name="Begin Web Test" library="Common" type="SETUP">
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>about:blank</arg>
 <arg>chrome</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20220515 21:17:27.560" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
-<status status="PASS" starttime="20220515 21:17:27.560" endtime="20220515 21:17:29.262"/>
+<msg timestamp="20220515 21:40:38.221" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20220515 21:40:38.221" endtime="20220515 21:40:39.952"/>
 </kw>
-<status status="PASS" starttime="20220515 21:17:27.559" endtime="20220515 21:17:29.263"/>
+<status status="PASS" starttime="20220515 21:40:38.221" endtime="20220515 21:40:39.952"/>
 </kw>
 <kw name="Search for Topic" library="Wikipedia">
 <kw name="Go To" library="SeleniumLibrary">
 <arg>https://en.wikipedia.org/wiki/Main_Page</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20220515 21:17:29.264" level="INFO">Opening url 'https://en.wikipedia.org/wiki/Main_Page'</msg>
-<status status="PASS" starttime="20220515 21:17:29.264" endtime="20220515 21:17:30.041"/>
+<msg timestamp="20220515 21:40:39.954" level="INFO">Opening url 'https://en.wikipedia.org/wiki/Main_Page'</msg>
+<status status="PASS" starttime="20220515 21:40:39.954" endtime="20220515 21:40:40.765"/>
 </kw>
 <kw name="Wait Until Page Contains" library="SeleniumLibrary">
 <arg>Main Page</arg>
 <doc>Waits until ``text`` appears on the current page.</doc>
-<status status="PASS" starttime="20220515 21:17:30.041" endtime="20220515 21:17:30.093"/>
+<status status="PASS" starttime="20220515 21:40:40.766" endtime="20220515 21:40:40.812"/>
 </kw>
 <kw name="Input Text" library="SeleniumLibrary">
 <arg>id=searchInput</arg>
 <arg>robot framework</arg>
 <doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<msg timestamp="20220515 21:17:30.094" level="INFO">Typing text 'robot framework' into text field 'id=searchInput'.</msg>
-<status status="PASS" starttime="20220515 21:17:30.093" endtime="20220515 21:17:30.252"/>
+<msg timestamp="20220515 21:40:40.812" level="INFO">Typing text 'robot framework' into text field 'id=searchInput'.</msg>
+<status status="PASS" starttime="20220515 21:40:40.812" endtime="20220515 21:40:40.963"/>
 </kw>
 <kw name="Click Button" library="SeleniumLibrary">
 <arg>id=searchButton</arg>
 <doc>Clicks the button identified by ``locator``.</doc>
-<msg timestamp="20220515 21:17:30.252" level="INFO">Clicking button 'id=searchButton'.</msg>
-<status status="PASS" starttime="20220515 21:17:30.252" endtime="20220515 21:17:31.298"/>
+<msg timestamp="20220515 21:40:40.963" level="INFO">Clicking button 'id=searchButton'.</msg>
+<status status="PASS" starttime="20220515 21:40:40.963" endtime="20220515 21:40:42.032"/>
 </kw>
 <kw name="Wait Until Page Contains" library="SeleniumLibrary">
 <arg>Robot Framework is a generic test automation</arg>
 <doc>Waits until ``text`` appears on the current page.</doc>
-<status status="PASS" starttime="20220515 21:17:31.299" endtime="20220515 21:17:31.347"/>
+<status status="PASS" starttime="20220515 21:40:42.032" endtime="20220515 21:40:42.080"/>
 </kw>
-<status status="PASS" starttime="20220515 21:17:29.263" endtime="20220515 21:17:31.348"/>
+<status status="PASS" starttime="20220515 21:40:39.954" endtime="20220515 21:40:42.080"/>
 </kw>
 <kw name="Try To Edit Topic" library="Wikipedia">
 <kw name="Click Link" library="SeleniumLibrary">
 <arg>xpath=//*[@id="ca-edit"]/a</arg>
 <doc>Clicks a link identified by ``locator``.</doc>
-<msg timestamp="20220515 21:17:31.349" level="INFO">Clicking link 'xpath=//*[@id="ca-edit"]/a'.</msg>
-<status status="PASS" starttime="20220515 21:17:31.349" endtime="20220515 21:17:32.835"/>
+<msg timestamp="20220515 21:40:42.082" level="INFO">Clicking link 'xpath=//*[@id="ca-edit"]/a'.</msg>
+<status status="PASS" starttime="20220515 21:40:42.081" endtime="20220515 21:40:43.346"/>
 </kw>
 <kw name="Wait Until Page Contains" library="SeleniumLibrary">
 <arg>You are not logged in.</arg>
 <doc>Waits until ``text`` appears on the current page.</doc>
-<status status="PASS" starttime="20220515 21:17:32.835" endtime="20220515 21:17:32.904"/>
+<status status="PASS" starttime="20220515 21:40:43.346" endtime="20220515 21:40:43.365"/>
 </kw>
-<status status="PASS" starttime="20220515 21:17:31.348" endtime="20220515 21:17:32.904"/>
+<status status="PASS" starttime="20220515 21:40:42.081" endtime="20220515 21:40:43.365"/>
 </kw>
-<kw name="End Web Test" library="Common">
+<kw name="End Web Test" library="Common" type="TEARDOWN">
 <kw name="Close Browser" library="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20220515 21:17:32.905" endtime="20220515 21:17:35.133"/>
+<status status="PASS" starttime="20220515 21:40:43.366" endtime="20220515 21:40:45.629"/>
 </kw>
-<status status="PASS" starttime="20220515 21:17:32.905" endtime="20220515 21:17:35.134"/>
+<status status="PASS" starttime="20220515 21:40:43.366" endtime="20220515 21:40:45.629"/>
 </kw>
 <doc>User should get a prompt stating they are not logged in</doc>
 <tag>smoke</tag>
 <tag>web</tag>
-<status status="PASS" starttime="20220515 21:17:27.558" endtime="20220515 21:17:35.135"/>
+<status status="PASS" starttime="20220515 21:40:38.220" endtime="20220515 21:40:45.631"/>
 </test>
 <doc>Searching a topic and trying to edit it</doc>
-<status status="PASS" starttime="20220515 21:17:27.241" endtime="20220515 21:17:35.140"/>
+<status status="PASS" starttime="20220515 21:40:37.897" endtime="20220515 21:40:45.636"/>
 </suite>
 <statistics>
 <total>

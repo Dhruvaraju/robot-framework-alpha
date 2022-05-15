@@ -14,6 +14,7 @@
     - [Creating custom keywords](#creating-custom-keywords)
     - [Breaking down test to keywords](#breaking-down-test-to-keywords)
     - [Moving keywords to resources folder](#moving-keywords-to-resources-folder)
+    - [Adding setup and teardown](#adding-setup-and-teardown)
 
 ### Installing python and pip
 
@@ -372,6 +373,43 @@ Should display user not logged in message
     Wikipedia.Search for Topic
     Wikipedia.Try To Edit Topic
     Common.End Web Test
+
+*** Keywords ***
+```
+
+### Adding setup and teardown
+
+- We have two types of setup and teardown
+
+  - test
+  - suite
+
+- Test setup will run before every test-case
+- Test teardown will run after every test-case
+
+- Suite Setup will run before all test cases.
+- Suite Teardown will run after all test cases are completed running.
+
+> We can open a browser in test setup and close it in test teardown
+> Generally Suite setup is used to add test data and suite teardown is used to remove test data from a source.
+
+Test or suite setup and teardown will be mentioned under settings
+
+```robot
+*** Settings ***
+Documentation    Searching a topic and trying to edit it
+Resource    ../Resources/Common.robot
+Resource    ../Resources/Wikipedia.robot
+Test Setup    Begin Web Test
+Test Teardown    End Web Test
+*** Variables ***
+
+*** Test Cases ***
+Should display user not logged in message
+    [Documentation]    User should get a prompt stating they are not logged in
+    [Tags]    web   smoke
+    Wikipedia.Search for Topic
+    Wikipedia.Try To Edit Topic
 
 *** Keywords ***
 ```
