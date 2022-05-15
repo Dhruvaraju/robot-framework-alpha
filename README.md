@@ -8,6 +8,9 @@
     - [Structure of a Script](#structure-of-a-script)
     - [First Test Script](#first-test-script)
     - [Creating a sample test script with locators](#creating-a-sample-test-script-with-locators)
+    - [Script Running Options](#script-running-options)
+    - [Running Multiple test suits](#running-multiple-test-suits)
+    - [Running a single test case](#running-a-single-test-case)
 
 ### Installing python and pip
 
@@ -110,9 +113,14 @@ User must sign-in to checkout
 robot tests/Amazon.robot #for the location where script is present
 robot -d results tests/Amazon.robot #results is the folder where the results will be stored
 ```
+
 > Its a best practice to create a manual test scenario before writing automation test script.
 
+> To know list of all key words required to write tests navigate to library documentation
+> Example for SeleniumLibrary keywords https://robotframework.org/SeleniumLibrary/SeleniumLibrary.html
+
 ### Creating a sample test script with locators
+
 - The ID or xpath or css selector of an element is called as locator.
 - Navigate a desired webpage in chrome, right click on the element you want to find a locator for.
 - Click on inspect in developer tools the section will be highlighted.
@@ -136,3 +144,62 @@ Navigate to wikipedia page
     close browser
 *** Keywords ***
 ```
+
+### Script Running Options
+
+To run a robot script from **pycharm** open terminal then run any of the following commands.
+To run **using command prompt** navigate to the folder and then run the following commands.
+
+```dos
+robot path-to-test-script.robot #To run from the location where script is present
+robot -d results path-to-test-script.robot # to run and place results in a folder called results
+robot -d results --include smoke path-to-test-script.robot # place results in results folder and run only smoke tests
+robot -d <<Provide-location-to-remote-results-directory>> -i smoke path-to-test-script.robot # run and place results in a different directory, run only smoke tests
+```
+
+**Running using Batch file**
+Add the following to a batch script.
+
+```dos
+@echooff
+cd <<folder where script project is present>>
+call robot path-to-test-script.robot
+call robot -d results path-to-test-script.robot
+call robot -d results --include smoke path-to-test-script.robot
+call robot -d <<Provide-location-to-remote-results-directory>> -i smoke path-to-test-script.robot
+```
+
+> To schedule the a robot script run, add the batch script created earlier and assign time-slot.
+> With windows scheduler.
+
+### Running Multiple test suits
+
+- Run the robot command which you usually use instead of pointing it to a script file just mention the folder name.
+- For example if you want to run all the test in tests folder use
+
+```
+robot -d results tests
+```
+
+- If you like to give a name to the test suite you are running you can trigger it as
+
+```
+robot -d results -N "Regression test suite" tests
+```
+
+- If you like to run tests present in a sub folder use
+
+```
+robot -d results -N "Regression test suite" "tests/folder for some tests"
+```
+
+### Running a single test case
+- use the absolute name or '-t' switch with test name
+
+```
+robot -d results <<absolute-path-for-test-case>>
+robot -d results -t "name-of-test-case" tests # runs a particular test with name specified in test folder
+robot -d results -i "mention-tag-name" tets # runs with specific tag name in tests folder
+```
+> We can use multiple '-t' or '-i' switches in same execution.
+
