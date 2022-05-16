@@ -19,6 +19,8 @@
     - [Adding Gherkin](#adding-gherkin)
     - [Adding Variables](#adding-variables)
     - [Passing variables from script](#passing-variables-from-script)
+    - [Libraries](#libraries)
+    - [Built in](#built-in)
 
 ### Installing python and pip
 
@@ -538,3 +540,6 @@ We can use as many `-v` switches as required.
 ```dos
 robot -d results -v BROWSER:chrome -v url:"about:blank" variables.robot
 ```
+### Libraries
+### Built in
+- Documentation available at https://robotframework.org/robotframework/latest/libraries/BuiltIn.html
