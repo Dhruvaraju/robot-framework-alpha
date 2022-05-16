@@ -18,6 +18,7 @@
     - [Creating Page Objects](#creating-page-objects)
     - [Adding Gherkin](#adding-gherkin)
     - [Adding Variables](#adding-variables)
+    - [Passing variables from script](#passing-variables-from-script)
 
 ### Installing python and pip
 
@@ -528,4 +529,12 @@ Begin Web Test
     [Arguments]    ${url}    ${BROWSER}
     open browser    ${url}    ${BROWSER}
     close browser
+```
+
+### Passing variables from script
+To pass variables using the command line use `-v` switch
+We can use as many `-v` switches as required.
+
+```dos
+robot -d results -v BROWSER:chrome -v url:"about:blank" variables.robot
 ```
