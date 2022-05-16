@@ -15,6 +15,9 @@
     - [Breaking down test to keywords](#breaking-down-test-to-keywords)
     - [Moving keywords to resources folder](#moving-keywords-to-resources-folder)
     - [Adding setup and teardown](#adding-setup-and-teardown)
+    - [Creating Page Objects](#creating-page-objects)
+    - [Adding Gherkin](#adding-gherkin)
+    - [Adding Variables](#adding-variables)
 
 ### Installing python and pip
 
@@ -412,4 +415,117 @@ Should display user not logged in message
     Wikipedia.Try To Edit Topic
 
 *** Keywords ***
+```
+
+### Creating Page Objects
+
+- We can keep page related interactions into a single file.
+- We can even drill down them to be a portion of page like nav-bar interactions or some other section.
+- Example is shown below
+
+```robot
+*** Settings ***
+Library    SeleniumLibrary
+Resource    ../Resources/page-objects/main-page.robot
+Resource    ../Resources/page-objects/edit-topic.robot
+*** Keywords ***
+Search for Topic
+    main-page.Load Wikipedia
+    main-page.Verify Page Load
+    main-page.Search For Topic
+    main-page.Verify Topic Page Load
+
+Try To Edit Topic
+    edit-topic.Start Editing Topic
+    edit-topic.Notify Login Status
+```
+
+page object : main-topic
+
+```robot
+*** Settings ***
+Library    SeleniumLibrary
+*** Keywords ***
+Load Wikipedia
+    go to    https://en.wikipedia.org/wiki/Main_Page
+
+Verify Page Load
+    wait until page contains    Main Page
+
+Search For Topic
+    input text    id=searchInput    robot framework
+    click button    id=searchButton
+
+Verify Topic Page Load
+    wait until page contains    Robot Framework is a generic test automation
+```
+
+page object : edit-topic
+
+```robot
+*** Settings ***
+Library    SeleniumLibrary
+
+*** Keywords ***
+Start Editing Topic
+    click link    xpath=//*[@id="ca-edit"]/a
+
+Notify Login Status
+    wait until page contains    You are not logged in.
+```
+
+### Adding Gherkin
+
+- Gherkin uses the following phrases, like given, and, when , then
+- Given AND are used for preconditions
+- When is used for actual test case test
+- Then will be used to check expected test result.
+
+### Adding Variables
+
+- Scalar variables or variable with single value can be added as `${variable_name} = vale of it`
+- List variables are provided as `@{list_variable} = var01 var02 var03'
+- To Return value from list variable use `${list_variable}[0]`
+- To get value of scalar variable use `${variable_name}`
+- For passing variables to keyword use as below
+
+```robot
+*** Test Cases ***
+    Begin Web Test    https://www.google.com    chrome
+*** Keywords ***
+Begin Web Test
+    [Arguments]    ${url}    ${BROWSER}
+    open browser    ${url}    ${BROWSER}
+    close browser
+
+```
+
+Few more examples of variables are mentioned below.
+
+```robot
+*** Settings ***
+Library    SeleniumLibrary
+*** Variables ***
+# Browser can now be passed to other sections
+# Varibales mentined here are generally global variables
+# We can also assign a variable in test case section
+${BROWSER} =    chrome
+@{LIST_VARIABLE} =    alpha    beta    gamma
+*** Test Cases ***
+Open a browser for test
+    OPEN BROWSER    about:blank    ${BROWSER}
+    ${BROWSER} =    Set Variable    firefox
+    log    ${BROWSER}
+    log    ${LIST_VARIABLE}[0]
+    log    ${LIST_VARIABLE}[1]
+    log    ${LIST_VARIABLE}[2]
+    ${test_var} =    Set Variable    non global variable value
+    log    ${test_var}
+    close browser
+    Begin Web Test    https://www.google.com    chrome
+*** Keywords ***
+Begin Web Test
+    [Arguments]    ${url}    ${BROWSER}
+    open browser    ${url}    ${BROWSER}
+    close browser
 ```
