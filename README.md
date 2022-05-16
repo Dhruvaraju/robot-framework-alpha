@@ -21,6 +21,11 @@
     - [Passing variables from script](#passing-variables-from-script)
     - [Libraries](#libraries)
     - [Built in](#built-in)
+    - [Additional Command Line options](#additional-command-line-options)
+    - [Forcing script Execution order](#forcing-script-execution-order)
+    - [Randomizing test execution](#randomizing-test-execution)
+    - [Additional logging](#additional-logging)
+    - [Return values from keywords](#return-values-from-keywords)
 
 ### Installing python and pip
 
@@ -534,12 +539,77 @@ Begin Web Test
 ```
 
 ### Passing variables from script
+
 To pass variables using the command line use `-v` switch
 We can use as many `-v` switches as required.
 
 ```dos
 robot -d results -v BROWSER:chrome -v url:"about:blank" variables.robot
 ```
+
 ### Libraries
+
 ### Built in
+
 - Documentation available at https://robotframework.org/robotframework/latest/libraries/BuiltIn.html
+
+### Additional Command Line options
+
+- To provide custom titles for test and log reports use
+
+```
+robot -d results --reporttitle "my reopor" --logtitle "my log" tests
+```
+
+To Mark specific tagged tests are critical
+
+```
+robot -d results --critical smoke tests # all smoke tests will be critical
+robot -d results --noncritical smoke tests # all smoke  tests will not be critical
+```
+
+To Avoid overwriting of results every time and create new versions of results use --timestampoutputs
+
+```
+robot -d results --timestampoutputs tests
+```
+
+### Forcing script Execution order
+
+Generally scripts follow alphabetical order, But if we want them to run in a specific order prefix them with numbers and double underscore.
+This feature will work in sub folders also.
+
+```
+01__feature-01.robot
+02__feature-02.robot
+```
+
+### Randomizing test execution
+
+Use `--randomize` with suites or tests or all or none
+
+```
+robot -de results --randomize tests tests # will randomize all tests execution
+```
+
+### Additional logging
+
+We can add more logging by enabling logs it can be done in 2 ways
+
+- Command line
+  - `robot -d results -L DEBUG tests`
+- Set Log Level keyword
+  - in a test script `set log level DEBUG`
+
+We have different log levels TRACE, DEBUG, INFO, WARN, ERROR and NONE
+
+> When ever in doubt goto user guide: https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html
+
+> Automatic variables are variables which are provided by robot framework to get info regarding execution.
+
+### Return values from keywords
+
+Pass info from an executing keyword to calling keyword.
+
+- ${ReturnInfo} = A keyword that returns
+- [Return] Something you want to return
