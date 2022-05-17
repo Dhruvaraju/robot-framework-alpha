@@ -26,6 +26,8 @@
     - [Randomizing test execution](#randomizing-test-execution)
     - [Additional logging](#additional-logging)
     - [Return values from keywords](#return-values-from-keywords)
+    - [Updating tools](#updating-tools)
+    - [Basic locators](#basic-locators)
 
 ### Installing python and pip
 
@@ -515,7 +517,7 @@ Few more examples of variables are mentioned below.
 Library    SeleniumLibrary
 *** Variables ***
 # Browser can now be passed to other sections
-# Varibales mentined here are generally global variables
+# Variables mentioned here are generally global variables
 # We can also assign a variable in test case section
 ${BROWSER} =    chrome
 @{LIST_VARIABLE} =    alpha    beta    gamma
@@ -558,7 +560,7 @@ robot -d results -v BROWSER:chrome -v url:"about:blank" variables.robot
 - To provide custom titles for test and log reports use
 
 ```
-robot -d results --reporttitle "my reopor" --logtitle "my log" tests
+robot -d results --reporttitle "my report" --logtitle "my log" tests
 ```
 
 To Mark specific tagged tests are critical
@@ -613,3 +615,56 @@ Pass info from an executing keyword to calling keyword.
 
 - ${ReturnInfo} = A keyword that returns
 - [Return] Something you want to return
+
+### Updating tools
+
+- To update python, download the most recent version and install it, it should over right the older version
+- To get list of pip libraries use command `pip list`.
+- To upgrade pip use the following command `python -m pip install --upgrade pip`
+- To upgrade pip library use `pip --upgrade <<library-name>>`
+- https://pypi.org/ is the package manager for python packages.
+- To uninstall a pip library the command is `pip uninstall <<library-name>>.
+
+### Basic locators
+
+- Id `id= myid`
+- HTML Name `Click link *name=some-name`
+- Link Text `Click Link *link=Your Amazon.com`
+- Partial Link Text `Click Link partial link=ur Amazo`
+- Xpath `Click Link xpath=//a[@id='Foo']`
+- CSS `Click Link css=a[id='Foo']`
+
+**Partial Locators:**
+
+**Starts With:**
+
+- xpath
+
+  - Click Element xpath=//input[type='submit-321]
+  - Click Element xpath=//input[starts-with(@type,'Submit')]
+
+- css
+  - Click Element css=input[type='submit-321]
+  - Click Element css=input[type^='Submit')]
+
+**Ends With:**
+
+- xpath
+
+  - Click Element xpath=//input[type='submit-321]
+  - Click Element xpath=//input[ends-with(@type,'Submit')]
+
+- css
+  - Click Element css=input[type='submit-321]
+  - Click Element css=input[type$='Submit')]
+
+**Contains:**
+
+- xpath
+
+  - Click Element xpath=//input[type='submit-321]
+  - Click Element xpath=//input[contains(@type,'Submit')]
+
+- css
+  - Click Element css=input[type='submit-321]
+  - Click Element css=input[type*='Submit')]
