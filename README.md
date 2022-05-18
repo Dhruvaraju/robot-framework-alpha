@@ -18,6 +18,7 @@
     - [Creating Page Objects](#creating-page-objects)
     - [Adding Gherkin](#adding-gherkin)
     - [Adding Variables](#adding-variables)
+    - [Dictionary](#dictionary)
     - [Passing variables from script](#passing-variables-from-script)
     - [Libraries](#libraries)
     - [Built in](#built-in)
@@ -28,6 +29,10 @@
     - [Return values from keywords](#return-values-from-keywords)
     - [Updating tools](#updating-tools)
     - [Basic locators](#basic-locators)
+    - [Loops](#loops)
+    - [If else](#if-else)
+    - [For Loop](#for-loop)
+    - [Templates](#templates)
 
 ### Installing python and pip
 
@@ -540,6 +545,15 @@ Begin Web Test
     close browser
 ```
 
+### Dictionary
+
+- It is used to store key value pairs
+- use collections library with get value from dictionary for retrieving values
+
+```robot
+&{CUSTOMER_USER}  FirstName=Bryan  LastName=Lamb  Dob=1/1/1900  Email=bryan@robotframework.com  Password=MyPassword!
+```
+
 ### Passing variables from script
 
 To pass variables using the command line use `-v` switch
@@ -668,3 +682,48 @@ Pass info from an executing keyword to calling keyword.
 - css
   - Click Element css=input[type='submit-321]
   - Click Element css=input[type*='Submit')]
+
+### Loops
+
+### If else
+
+- We can use if and else loop when we are checking values by using `Run Keyword If`
+
+```robot
+Testing an IF/ElSE IF/ELSE statement
+    Run Keyword If  ${MY_VALUE} > 200  Keyword 1
+    ...  ELSE IF  ${MY_VALUE} == 10  Keyword 2
+    ...  ELSE  Keyword 3
+```
+
+### For Loop
+
+Syntax for for loop is below
+
+```robot
+FOR  ${Index}    IN RANGE    5
+      Do Something    ${Index}
+      ${RANDOM_STRING} =  Generate Random String  ${Index}
+      Log  ${RANDOM_STRING}
+    END
+```
+
+### Templates
+
+Templates can run the same code multiple times
+
+```robot
+*** Variables ***
+
+*** Test Cases ***
+My Test
+    [Template]  My Test Template
+    One     Two     Three       Four
+    Five    Six     Seven       Eight
+
+*** Keywords ***
+My Test Template
+    [Arguments]  ${ValueOne}  ${ValueTwo}  ${ValueThree}  ${ValueFour}
+    Log  ${ValueOne}
+    Log  ${ValueTwo}
+```
