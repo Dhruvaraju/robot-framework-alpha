@@ -629,6 +629,14 @@ Pass info from an executing keyword to calling keyword.
 
 - ${ReturnInfo} = A keyword that returns
 - [Return] Something you want to return
+- Do not perform any operations on using return key word, after execution only pass the final result
+
+```python
+[Return] Get on Session  getSession api/user  # will not work
+# We need to use it as below
+${response} =  Get on Session  getSession api/user  # will not work
+[Return]  ${response}
+```
 
 ### Updating tools
 
