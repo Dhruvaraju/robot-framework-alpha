@@ -87,7 +87,7 @@ options = {
     "report": "none"
 }
 
-result = run(*test_path, **options)
+result = run(test_path, **options)
 if result == 0:
     print("Test Executed Successfully")
 else:
