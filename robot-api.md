@@ -177,3 +177,6 @@ class PythonListener:
 ```
 
 > File name and class name should be same for the listener to be picked up as, listener checks for a library.
+
+- Version 3 has capability for manipulating test data and results, where as version 2 can only report the status of tests.
+  
