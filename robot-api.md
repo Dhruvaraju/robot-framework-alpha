@@ -179,4 +179,12 @@ class PythonListener:
 > File name and class name should be same for the listener to be picked up as, listener checks for a library.
 
 - Version 3 has capability for manipulating test data and results, where as version 2 can only report the status of tests.
-  
+
+Attaching listener to a run:
+
+```commandline
+robot --listener MyListener tests.robot
+robot --listener com.company.package.Listener tests.robot
+robot --listener path/to/MyListener.py tests.robot
+robot --listener module.Listener --listener AnotherListener tests.robot
+```
