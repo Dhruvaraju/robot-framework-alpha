@@ -188,3 +188,5 @@ robot --listener com.company.package.Listener tests.robot
 robot --listener path/to/MyListener.py tests.robot
 robot --listener module.Listener --listener AnotherListener tests.robot
 ```
+
+#TODO parsing robot files and finding the test suite information
